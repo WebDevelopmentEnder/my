@@ -10,19 +10,24 @@
 <style>
 :root{
   --blue:#3b82f6;
-  --blueGlow:rgba(59,130,246,.55);
+  --glow:rgba(59,130,246,.6);
   --border:rgba(120,160,255,.25);
+  --bg:#05070c;
+  --panel:#0b1222;
   --text:#e5e7eb;
   --muted:#9ca3af;
+  --green:#22c55e;
+  --lightgreen:#86efac;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 
 body{
   font-family:Inter,sans-serif;
   background:
-    radial-gradient(circle at 85% 20%, #0a1c3d, transparent 40%),
-    #05070c;
+    radial-gradient(circle at 85% 20%, #0a1c3d, transparent 45%),
+    var(--bg);
   color:var(--text);
 }
 
@@ -34,189 +39,262 @@ header{
   justify-content:space-between;
   align-items:center;
 }
-
-.logo{
-  font-weight:700;
-  letter-spacing:2px;
-}
-
+.logo{font-weight:700;letter-spacing:3px}
 .btn{
   padding:10px 22px;
   border-radius:14px;
   border:1px solid var(--border);
   background:linear-gradient(135deg,rgba(59,130,246,.35),rgba(59,130,246,.1));
   color:white;
-  transition:.3s;
+  text-decoration:none;
+  cursor:pointer;
 }
-.btn:hover{
-  box-shadow:0 0 30px var(--blueGlow);
-}
+.btn:hover{box-shadow:0 0 25px var(--glow)}
 
 /* HERO */
 .hero{
   margin-top:90px;
   display:grid;
   grid-template-columns:1.1fr .9fr;
-  gap:50px;
-  align-items:center;
+  gap:60px;
 }
 
 .webdev{
-  color:var(--muted);
-  letter-spacing:3px;
   text-transform:uppercase;
   font-size:14px;
+  letter-spacing:3px;
+  color:var(--muted);
 }
 
-/* TYPE LOOP */
-.typing{
+.ender{
   font-size:60px;
   letter-spacing:3px;
-  overflow:hidden;
-  white-space:nowrap;
-  border-right:3px solid var(--blue);
-  width:0;
-  animation:
-    typing 6s steps(5,end) infinite,
-    blink .9s infinite;
+  transform:translateX(-120%);
+  opacity:0;
+  animation:slideIn 1.6s ease forwards;
 }
-
-@keyframes typing{
-  0%{width:0}
-  25%{width:250px}
-  55%{width:250px}
-  85%{width:0}
-  100%{width:0}
-}
-
-@keyframes blink{
-  50%{border-color:transparent}
+@keyframes slideIn{
+  to{transform:translateX(0);opacity:1}
 }
 
 .hero p{
-  margin-top:25px;
-  color:var(--muted);
-  line-height:1.7;
+  margin-top:26px;
   max-width:520px;
+  line-height:1.7;
+  color:var(--muted);
 }
 
 /* SKILLS */
-.skills-panel{
+.skills-box{
+  background:linear-gradient(135deg,rgba(15,30,60,.6),rgba(10,20,40,.6));
+  border:1px solid var(--border);
   border-radius:22px;
   padding:26px;
-  background:linear-gradient(135deg,rgba(20,40,80,.5),rgba(10,20,40,.5));
-  border:1px solid var(--border);
-  box-shadow:0 0 40px var(--blueGlow);
+  box-shadow:0 0 40px var(--glow);
 }
 
-.skills-title{
-  text-align:center;
-  font-size:14px;
-  color:var(--muted);
-  margin-bottom:18px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.skills{
-  display:flex;
-  gap:14px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
+.skills-title{text-align:center;color:var(--muted);margin-bottom:18px}
+.skills{display:flex;justify-content:center;gap:14px}
 
 .skill{
   padding:12px 22px;
   border-radius:999px;
   border:1px solid var(--border);
-  background:rgba(10,20,40,.6);
-  transition:.35s ease;
+  background:#0a1326;
+  transition:.35s;
+}
+.skill:hover{transform:translateY(-6px);box-shadow:0 0 18px var(--glow)}
+
+.terminal-center{display:flex;justify-content:center}
+.terminal-wrap{
+  margin-top:26px;
+  background:#0b1222;
+  border-radius:18px;
+  border:1px solid var(--border);
+  padding:18px 20px;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6);
+  font-family:monospace;
+  font-size:14px;
+  width:fit-content;
 }
 
-.skill:hover{
-  transform:translateY(-10px);
-  box-shadow:0 0 20px var(--blueGlow);
-}
+.term-head{display:flex;gap:8px;margin-bottom:14px}
+.dot{width:10px;height:10px;border-radius:50%}
+.red{background:#ff5f56}
+.yellow{background:#ffbd2e}
+.green{background:#27c93f}
+
+.term-line{opacity:0;margin-bottom:6px;animation:term .6s forwards;white-space:nowrap}
+.term-line:nth-child(2){animation-delay:.4s}
+.term-line:nth-child(3){animation-delay:.9s}
+.term-line:nth-child(4){animation-delay:1.4s}
+.ok{color:var(--green)}
+@keyframes term{to{opacity:1;color:var(--lightgreen)}}
+
+/* SECTIONS */
+section{margin-top:140px}
+section h2{text-align:center;font-size:42px;margin-bottom:60px}
 
 /* PORTFOLIO */
-section{margin-top:130px}
-section h2{
-  text-align:center;
-  font-size:42px;
-  margin-bottom:60px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:26px;
-}
-
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
 .card{
   position:relative;
-  overflow:hidden;
   padding:26px;
   border-radius:22px;
   border:1px solid var(--border);
-  background:linear-gradient(135deg,rgba(20,40,80,.5),rgba(10,20,40,.5));
+  background:linear-gradient(135deg,rgba(15,30,60,.5),rgba(10,20,40,.5));
+  overflow:hidden;
 }
-
 .card-blur{
   position:absolute;
   inset:0;
+  background:rgba(5,10,20,.7);
   backdrop-filter:blur(12px);
-  background:rgba(5,10,20,.6);
   transform:translateX(-100%);
-  transition:.6s ease;
-  display:flex;
-  align-items:center;
+  transition:.6s;
   padding:30px;
 }
-
-.card:hover .card-blur{
-  transform:translateX(0);
-}
-
+.card:hover .card-blur{transform:translateX(0)}
 .date{font-size:12px;color:var(--muted);margin:8px 0}
-.short{font-size:14px;color:var(--muted)}
 
 /* CONTACT */
-.contact{
-  margin-top:140px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.panel{
+  background:linear-gradient(135deg,rgba(20,40,80,.6),rgba(15,30,60,.6));
+  border-radius:22px;
+  border:1px solid var(--border);
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  height:320px;
 }
 
 input,textarea{
   width:100%;
+  margin-bottom:6px;
   padding:14px;
-  margin-bottom:16px;
-  background:rgba(10,20,40,.6);
+  background:#10192e;
   border:1px solid var(--border);
   border-radius:14px;
   color:white;
 }
+textarea{height:120px;resize:none}
 
-textarea{resize:none;height:120px}
+/* error */
+.error-text{
+  color:#ef4444;
+  font-size:12px;
+  min-height:16px;
+  margin-bottom:10px;
+}
 
 /* FOOTER */
 footer{
-  margin-top:140px;
-  padding:40px 20px;
-  border-top:1px solid var(--border);
+  margin-top:160px;
+  padding:60px 40px;
+  background:linear-gradient(135deg,#0b1e3a,#123a6b);
 }
+.footer-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:40px;
+}
+.footer-grid a{color:white;text-decoration:none;display:block;margin-bottom:10px}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#22c55e;
+  color:white;
+  padding:14px 22px;
+  border-radius:12px;
+  opacity:0;
+  transform:translateY(-20px);
+  transition:.4s;
+  z-index:9999;
+}
+.toast.show{opacity:1;transform:translateY(0)}
 
 @media(max-width:900px){
-  .hero,.contact{grid-template-columns:1fr}
-  .grid{grid-template-columns:1fr}
-  .typing{font-size:44px}
+  .hero,.contact-grid,.footer-grid,.grid{grid-template-columns:1fr}
+  .ender{font-size:44px}
 }
+
+.tg-input{
+  display:flex;
+  align-items:center;
+  background:#10192e;
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+
+.tg-input span{
+  color:#6b7280;
+  padding-left:14px;
+  user-select:none;
+}
+
+.tg-input input{
+  border:none;
+  background:transparent;
+  padding:14px 14px 14px 6px;
+  color:white;
+  width:100%;
+}
+
+.tg-input input:focus{
+  outline:none;
+}
+
+.footer-link{
+  position:relative;
+  display:inline-block;
+  color:white;
+  text-decoration:none;
+  padding-bottom:4px;
+}
+
+.footer-link::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--blue),#60a5fa);
+  transition:.4s ease;
+}
+
+.footer-link:hover::after{
+  width:100%;
+}
+
+.contact-label{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+
+.contact-link-plain{
+  color:white;
+  font-weight:600;        /* выделение */
+  cursor:pointer;
+  line-height:1.4;
+}
+
+
 </style>
 </head>
 
 <body>
-<div class="container">
+
+<div class="toast" id="toast">Сообщение отправлено</div>
+
+<div class="container" id="home">
 
 <header>
   <div class="logo">ENDER</div>
@@ -226,81 +304,269 @@ footer{
 <div class="hero">
   <div>
     <div class="webdev">Web Development</div>
-    <div class="typing">Ender</div>
+    <div class="ender">Ender</div>
 
     <p>
       Разработка и реализация веб-сайтов и интерфейсов.<br>
-      Создание пользовательских макетов и вспомогательных
+      Создание пользовательских макетов и вспомогательных<br>
       веб-решений для проектов любой сложности.
     </p>
   </div>
 
-  <div class="skills-panel">
-    <div class="skills-title">Основные языки работы</div>
-    <div class="skills">
-      <div class="skill">HTML</div>
-      <div class="skill">CSS</div>
-      <div class="skill">JavaScript</div>
-      <div class="skill">Python</div>
+  <div>
+    <div class="skills-box">
+      <div class="skills-title">Основные языки</div>
+      <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Python</div>
+      </div>
+    </div>
+
+    <div class="terminal-center">
+      <div class="terminal-wrap">
+        <div class="term-head">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+        </div>
+        <div class="term-line">$ npm create next-app</div>
+        <div class="term-line ok">✓ Creating project...</div>
+        <div class="term-line ok">✓ Installing dependencies...</div>
+        <div class="term-line ok">✓ Project ready!</div>
+      </div>
     </div>
   </div>
 </div>
 
-<section>
+<section id="portfolio">
 <h2>Портфолио</h2>
 <div class="grid">
-
-<div class="card">
-  <h3>RealCore Online</h3>
-  <div class="date">15.11.2025</div>
-  <div class="short">Сайт проекта</div>
-  <div class="card-blur">
-    Полноценный веб-сайт проекта с адаптивной
-    версткой и интерфейсной логикой.
+  <div class="card">
+    <h3>Личный сайт</h3>
+    <div class="date">02.02.2026</div>
+    <div class="card-blur">Сайт для личного использования и информации о себе</div>
   </div>
-</div>
-
-<div class="card">
-  <h3>Condition Online</h3>
-  <div class="date">20.09.2025</div>
-  <div class="short">Игровой сайт</div>
-  <div class="card-blur">
-    Промо-сайт игрового проекта с кастомным UI.
+  <div class="card">
+    <h3>RealCore Online</h3>
+    <div class="date">15.11.2025</div>
+    <div class="card-blur">Официальный сайт проекта</div>
   </div>
-</div>
-
-<div class="card">
-  <h3>Web Service</h3>
-  <div class="date">05.08.2025</div>
-  <div class="short">Веб-сервис</div>
-  <div class="card-blur">
-    Сервис с пользовательскими формами и логикой
-    взаимодействия.
+  <div class="card">
+    <h3>Condition Online</h3>
+    <div class="date">20.09.2025</div>
+    <div class="card-blur">Игровой веб-сайт</div>
   </div>
-</div>
-
 </div>
 </section>
 
 <section id="contact">
-<h2>Связаться</h2>
-<div class="contact">
-  <form>
-    <input placeholder="Имя">
-    <input placeholder="Telegram">
-    <textarea placeholder="Сообщение"></textarea>
-    <button class="btn" type="button">Отправить</button>
-  </form>
-  <div>
-    <p>Для сотрудничества и проектов.</p>
+<h2>Связь со мной</h2>
+
+<div class="contact-grid">
+  <div class="panel">
+    <h3>Telegram</h3><br>
+
+    <form id="tgForm">
+      <input name="name" placeholder="Имя" data-required>
+      <div class="error-text"></div>
+
+      <div class="tg-input">
+        <span>@</span>
+        <input name="telegram" placeholder="username" data-required>
+      </div>
+      <div class="error-text"></div>
+
+      <input name="message" placeholder="Сообщение" data-required>
+      <div class="error-text"></div>
+
+      <button class="btn" type="submit">Отправить</button>
+    </form>
+  </div>
+
+  <div class="panel">
+    <h3>Контактная информация</h3>
+
+    <div style="margin-top:30px;display:flex;gap:18px;align-items:center;">
+      <img src="/assets/mail.svg" width="24">
+      <div>
+        <div class="contact-label">Telegram</div>
+        <div class="contact-link-plain copy-tg"
+             data-copy="https://t.me/tyrbo_end?direct">
+          https://t.me/tyrbo_end?direct
+        </div>
+      </div>
+    </div>
+
+
+
+    <div style="margin-top:60px;display:flex;gap:18px;align-items:center;">
+      <img src="/assets/pin.svg" width="24">
+      <div>
+        <div style="font-size:13px;color:var(--muted)">Местоположение</div>
+        <div>Россия</div>
+      </div>
+    </div>
   </div>
 </div>
+
 </section>
 
+</div>
+
 <footer>
-<strong>ENDER</strong>
+  <div class="footer-grid">
+    <div>
+      <h2>Ender</h2>
+      <p>Сайты, которые работают</p>
+    </div>
+    <div>
+      <b>Навигация</b><br><br>
+        <a href="#home" class="footer-link">Главная</a>
+        <a href="#portfolio" class="footer-link">Портфолио</a>
+        <a href="#contact" class="footer-link">Обратная связь</a>
+    </div>
+    <div>
+        <b>Контакты</b><br><br>
+        
+        <div style="display:flex;gap:18px;align-items:center;">
+          <img src="/assets/mail.svg" width="24">
+          <div>
+            <div class="contact-label">Telegram</div>
+            <div class="contact-link-plain copy-tg"
+                 data-copy="https://t.me/tyrbo_end?direct">
+              https://t.me/tyrbo_end?direct
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
 </footer>
 
-</div>
+<script>
+const form = document.getElementById('tgForm');
+
+const nameInput = form.querySelector('input[name="name"]');
+const tgInput = form.querySelector('input[name="telegram"]');
+
+// SUBMIT
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+
+  let error = false;
+
+  // === NAME VALIDATION ===
+  const nameError = nameInput.nextElementSibling;
+  const nameValue = nameInput.value.trim();
+
+  if(!nameValue){
+    nameError.textContent = 'Обязательное поле';
+    error = true;
+  }
+  else if(!/^[a-zA-Zа-яА-ЯёЁ\s]+$/.test(nameValue)){
+    nameError.textContent = 'Имя не может содержать цифры или символы';
+    error = true;
+  }
+  else{
+    nameError.textContent = '';
+  }
+
+  // === MESSAGE REQUIRED ===
+  const msgInput = form.querySelector('input[name="message"]');
+  const msgError = msgInput.nextElementSibling;
+
+  if(!msgInput.value.trim()){
+    msgError.textContent = 'Обязательное поле';
+    error = true;
+  }else{
+    msgError.textContent = '';
+  }
+
+  // === TELEGRAM VALIDATION ===
+  const tgError = tgInput.parentElement.nextElementSibling;
+  const tgValue = tgInput.value;
+
+  if(!tgValue){
+    tgError.textContent = 'Обязательное поле';
+    error = true;
+  }
+  else if(tgValue.length < 5){
+    tgError.textContent = 'Минимум 5 символов';
+    error = true;
+  }
+  else if(!/^[a-zA-Z]/.test(tgValue)){
+    tgError.textContent = 'Username должен начинаться с буквы';
+    error = true;
+  }
+  else if(!/^[a-zA-Z0-9_]+$/.test(tgValue)){
+    tgError.textContent = 'Разрешены только a-z, 0-9 и _';
+    error = true;
+  }
+  else{
+    tgError.textContent = '';
+  }
+
+  if(error) return;
+
+  // SEND
+  const data = new FormData(form);
+  data.set('telegram', '@' + tgValue);
+
+  try{
+    const res = await fetch('send.php',{
+      method:'POST',
+      body:data
+    });
+
+    if(res.ok){
+      form.reset();
+      showToast('Сообщение отправлено');
+    }else{
+      showToast('Ошибка');
+    }
+  }catch{
+    showToast('Ошибка');
+  }
+});
+
+// === HARD FILTER TELEGRAM INPUT ===
+tgInput.addEventListener('input', ()=>{
+  let v = tgInput.value.toLowerCase();
+
+  v = v.replace(/[^a-z0-9_]/g, '');   // только допустимые
+  v = v.replace(/^[^a-z]+/, '');     // первый символ — буква
+  v = v.slice(0, 32);                // максимум 32
+
+  tgInput.value = v;
+  tgInput.parentElement.nextElementSibling.textContent = '';
+});
+
+// === HARD FILTER NAME INPUT ===
+nameInput.addEventListener('input', ()=>{
+  let v = nameInput.value;
+
+  v = v.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, '');
+  nameInput.value = v;
+  nameInput.nextElementSibling.textContent = '';
+});
+
+// COPY TG
+document.querySelectorAll('.copy-tg').forEach(el=>{
+  el.onclick = ()=>{
+    navigator.clipboard.writeText(el.dataset.copy);
+    showToast('Ссылка скопирована');
+  };
+});
+
+function showToast(text){
+  const el = document.getElementById('toast');
+  el.textContent = text;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2500);
+}
+</script>
+
+
 </body>
 </html>
